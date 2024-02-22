@@ -11,6 +11,6 @@ export const fetchLandingProducts =  () => {
   }
 
   export const fetchAddresses = async () => {
-    return request("/addresses")
+    return request("/660/addresses")
     
     }
