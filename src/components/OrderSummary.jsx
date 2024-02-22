@@ -22,7 +22,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
   const { data, status:couponStatus,isLoading:couponIsLoading } = useQuery({
     queryKey: ["apply-coupon",couponCode],
     queryFn: () => {
-      return request({ url: `http://localhost:4000/apply-coupon?coupon=${couponCode}` });
+      return request({ url: `https://furniture-backend-silk.vercel.app/apply-coupon?coupon=${couponCode}` });
     },
     enabled: !!couponCode,
     retry:false,
@@ -33,7 +33,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
   const { mutate:redirectToStripe,paymentStatus,isPending:stripeIsLoading, } = useMutation({
     mutationKey: ["payment-intent"],
     mutationFn: () => {
-      return request({ url: `http://localhost:4000/create-payment-intent`,method:"post",data : { items: cart.items,
+      return request({ url: `https://furniture-backend-silk.vercel.app/create-payment-intent`,method:"post",data : { items: cart.items,
       couponId,
       shippingMethod,} });
     },
