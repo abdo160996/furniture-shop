@@ -34,7 +34,7 @@ export const getTotal = function (cart, shippingPrice = 0, couponValue = 0, coup
     totalPrice += item.qty * item.price;
   });
   let discountValue = couponType === "fixed" ? totalPrice - couponValue : couponType === "percentage" ? (totalPrice * couponValue) / 100 : 0;
-  return { totalPrice: (totalPrice + shippingPrice - discountValue).toFixed(2), totalItems };
+  return { totalPrice: ((totalPrice + shippingPrice) - discountValue).toFixed(2), totalItems };
 };
 
 function CartContext({ children }) {

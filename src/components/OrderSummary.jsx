@@ -34,7 +34,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
     mutationKey: ["payment-intent"],
     mutationFn: () => {
       return request({ url: `https://furniture-backend-silk.vercel.app/create-payment-intent`,method:"post",data : { items: cart.items,
-      couponId,
+      couponId : coupon.couponId,
       shippingMethod,} });
     },
     onSuccess:(res) =>{
@@ -111,7 +111,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
         </div>
         <div className="coupon flex justify-between">
           <p>Coupon Applied</p>
-          <p>${coupon.discount}</p>
+          <p>{coupon.couponType === "percentage" ? `${coupon.discount}%` : `$${coupon.discount}`}</p>
         </div>
         <div className="divider"></div>
         <div className="total flex justify-between">
