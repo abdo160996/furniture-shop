@@ -1,5 +1,4 @@
 import React from "react";
-import data from "../../data.json";
 import RatingStars from "./RatingStars";
 function ReviewCard() {
   return (
