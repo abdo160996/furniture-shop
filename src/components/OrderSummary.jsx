@@ -17,14 +17,14 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
  
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
-  const { couponCode, setCouponCode, discount, setDiscount, couponId, setCouponId } = useCoupon();
+  const { coupon,setCoupon } = useCoupon();
 
   const { data, status:couponStatus,isLoading:couponIsLoading } = useQuery({
     queryKey: ["apply-coupon",couponCode],
     queryFn: () => {
-      return request({ url: `https://furniture-backend-silk.vercel.app/apply-coupon?coupon=${couponCode}` });
+      return request({ url: `https://furniture-backend-silk.vercel.app/apply-coupon?coupon=${coupon.couponCode}` });
     },
-    enabled: !!couponCode,
+    enabled: !! coupon.couponCode,
     retry:false,
     refetchOnWindowFocus:false,
     
@@ -49,18 +49,17 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
   useEffect(() => {
    
     if (couponStatus === "error") {
-      
-      setDiscount(0);
-      setCouponId(null);
+      setCoupon(pre =>({...pre,discount:0,couponId:null}))
+   
       setMsg('Invalid Coupon Code')
     }
     if(couponStatus === "success") {
-      setDiscount(parseFloat(data?.data?.discount || discount));
-      setCouponId(data?.data?.couponId);
+      setCoupon(pre =>({...pre,couponType:data?.data?.couponType,discount:parseFloat(data?.data?.discount || coupon.discount),couponId:data?.data?.couponId}))
+
       setMsg(`🎉 Coupon applied`);
   
      }
-  }, [couponStatus,couponCode]);
+  }, [couponStatus,coupon.couponCode]);
 
   const handleDiscount =  (e) => {
     const couponCode = e.target.value.trim().toLowerCase();
@@ -112,22 +111,22 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
         </div>
         <div className="coupon flex justify-between">
           <p>Coupon Applied</p>
-          <p>${discount}</p>
+          <p>${coupon.discount}</p>
         </div>
         <div className="divider"></div>
         <div className="total flex justify-between">
           <p>TOTAL</p>
-          <p className="font-bold">${getTotal(cart, shippingMethod?.price, discount).totalPrice}</p>
+          <p className="font-bold">${getTotal(cart, shippingMethod?.price,coupon.discount,coupon.couponType).totalPrice}</p>
         </div>
         <div className="delivery flex-col md:flex-row flex justify-between">
           <p>Estimated Delivery by</p>
           <p className="font-bold">{shippingMethod?.estimatedDeliveryDate}</p>
         </div>
         <div className="coupon-apply flex items-center justify-between p-4 gap-4 w-full border border-coolGray overflow-hidden">
-          <input value={couponCode} onChange={handleDiscount} type="text" placeholder="Coupon Code" className="px-2 border border-none focus:outline-none" />
+          <input value={coupon.couponCode} onChange={handleDiscount} type="text" placeholder="Coupon Code" className="px-2 border border-none focus:outline-none" />
           <TbDiscount className="w-6 h-6" />
         </div>
-        {couponIsLoading ? (<span className="loading loading-circle loading-sm mx-auto block"></span> ) : couponCode ? <p>{msg}</p> : ""}
+        {couponIsLoading ? (<span className="loading loading-circle loading-sm mx-auto block"></span> ) : coupon.couponCode ? <p>{msg}</p> : ""}
       
         <button
           disabled={loading}

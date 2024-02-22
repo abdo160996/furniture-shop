@@ -25,7 +25,7 @@ function reducer(state, action) {
   }
 }
 
-export const getTotal = function (cart, shipping = 0, discount = 0) {
+export const getTotal = function (cart, shippingPrice = 0, couponValue = 0, couponType = null) {
   if (cart.items.length === 0) return { totalPrice: 0, totalItems: 0 };
   let totalPrice = 0;
   let totalItems = 0;
@@ -33,7 +33,8 @@ export const getTotal = function (cart, shipping = 0, discount = 0) {
     totalItems += item.qty;
     totalPrice += item.qty * item.price;
   });
-  return { totalPrice: ((totalPrice + shipping) - discount).toFixed(2), totalItems };
+  let discountValue = couponType === "fixed" ? totalPrice - couponValue : couponType === "percentage" ? (totalPrice * couponValue) / 100 : 0;
+  return { totalPrice: (totalPrice + shippingPrice - discountValue).toFixed(2), totalItems };
 };
 
 function CartContext({ children }) {

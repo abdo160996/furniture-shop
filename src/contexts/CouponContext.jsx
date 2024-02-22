@@ -3,12 +3,17 @@ import  { createContext, useContext, useState } from 'react';
 const couponContext = createContext();
 
 const  CouponContext = ({ children }) => {
-  const [couponCode, setCouponCode] = useState("");
-  const [couponId, setCouponId] = useState(null);
-    const [discount, setDiscount] = useState(0);
+ 
+  const [coupon,setCoupon] = useState({
+    couponCode : "",
+    couponId : null,
+    discount: 0,
+    couponType: null
+
+  })
 
   return (
-    <couponContext.Provider value={{ couponCode, setCouponCode, discount, setDiscount ,couponId, setCouponId}}>
+    <couponContext.Provider value={{coupon,setCoupon}}>
       {children}
     </couponContext.Provider>
   );
