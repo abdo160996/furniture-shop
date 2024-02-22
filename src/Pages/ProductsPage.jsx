@@ -6,11 +6,9 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { request } from "../api/axios";
 
 function ProductsPage() {
-  const [loading, setLoading] = useState(false);
   const [limit, setLimit] = useState(8);
   const [pageNum, setPageNum] = useState(1);
-  // const [hasNextPage, setHasNextPage] = useState(false);
-  const [hasPrevPage, setHasPrevPage] = useState(false);
+
   const [sortBy, setSortBy] = useState("relevance");
   const [category, setCategory] = useState(null);
 

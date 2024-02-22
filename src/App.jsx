@@ -1,6 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import { useCartContext } from "./contexts/CartContext";
 
 import { Route, RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./layout/Layout";

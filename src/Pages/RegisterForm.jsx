@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import logo from "../assets/Furnique.svg";
+
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { auth } from "../configs/firebase";
-import {ToastContainer, toast}from 'react-toastify'
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate,Navigate, Link } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
-
 
 const validationSchema = yup.object({
   email: yup.string().required("Email is Required").email("Please enter a valid Email"),
@@ -21,69 +22,58 @@ const validationSchema = yup.object({
 });
 
 function RegisterForm() {
-  
   const {
     register,
     handleSubmit,
-    formState: { errors,  isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(validationSchema) });
-  const navigate = useNavigate()
-  const { user } = useAuthContext()
-  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false);
 
-
-  const validSubmit = async(data) => {
-    setIsLoading(true)
+  const validSubmit = async (data) => {
+    setIsLoading(true);
     try {
+      const userCreds = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      await updateProfile(userCreds.user, {
+        displayName: data.name,
+      });
 
-        const userCreds = await createUserWithEmailAndPassword(auth,data.email,data.password)
-        await updateProfile(userCreds.user, {
-          displayName: data.name
-        });
+      toast.success("Account created successfully! ", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
 
-        toast.success('Account created successfully! ', {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-          
-            theme: "light",
-            });
-            
-           
-           navigate('/login', { replace: true })
-          
+        theme: "light",
+      });
+
+      navigate("/login", { replace: true });
     } catch (error) {
-      switch(error.code){
-        case 'auth/email-already-in-use':
-          toast.error('Email already in use', {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          toast.error("Email already in use", {
             autoClose: 2000,
-          })
-          break
+          });
+          break;
       }
-      
-
+    } finally {
+      setIsLoading(false);
     }
-    finally{
-      setIsLoading(false)
-    }
-  
   };
- 
+
   if (user) {
-    
-    return <Navigate  to="/"  replace/>;
+    return <Navigate to="/" replace />;
   }
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-10">
-   
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  lg:py-0">
-        <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+        <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900">
+          <img className="w-8 h-8" src={logo} alt="logo" />
           Create an account
         </a>
-      
- <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+
+        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 relative">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Create and account</h1>
             <form onSubmit={handleSubmit(validSubmit)} className="space-y-4 md:space-y-6 " action="#">
@@ -158,12 +148,13 @@ function RegisterForm() {
                 </Link>
               </p>
             </form>
-            {isLoading && <div className="absolute inset-0 flex justify-center items-center bg-white  opacity-75" >
-            <span className="loading loading-infinity loading-lg mx-auto block"></span>
-              </div>}
+            {isLoading && (
+              <div className="absolute inset-0 flex justify-center items-center bg-white  opacity-75">
+                <span className="loading loading-infinity loading-lg mx-auto block"></span>
+              </div>
+            )}
           </div>
         </div>
-        
       </div>
     </section>
   );
