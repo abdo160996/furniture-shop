@@ -20,7 +20,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
   const { coupon,setCoupon } = useCoupon();
 
   const { data, status:couponStatus,isLoading:couponIsLoading } = useQuery({
-    queryKey: ["apply-coupon",couponCode],
+    queryKey: ["apply-coupon",coupon.couponCode],
     queryFn: () => {
       return request({ url: `https://furniture-backend-silk.vercel.app/apply-coupon?coupon=${coupon.couponCode}` });
     },
@@ -63,7 +63,7 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
 
   const handleDiscount =  (e) => {
     const couponCode = e.target.value.trim().toLowerCase();
-    setCouponCode(couponCode);
+    setCoupon(prev => ({...prev,couponCode}));
   };
 
   const showToast = (msg) => {
