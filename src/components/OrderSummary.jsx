@@ -54,7 +54,14 @@ function OrderSummary({ selectedTab, setSelectedTab, shippingMethod, selectedAdd
       setMsg('Invalid Coupon Code')
     }
     if(couponStatus === "success") {
-      setCoupon(pre =>({...pre,couponType:data?.data?.couponType,discount:parseFloat(data?.data?.discount || coupon.discount),couponId:data?.data?.couponId}))
+      setCoupon(pre => (
+        {...pre,
+        couponType:data.data?.couponType,
+        discount:parseFloat(data.data?.discount || coupon.discount),
+        couponId:data.data?.couponId
+      }
+        )
+        )
 
       setMsg(`🎉 Coupon applied`);
   
