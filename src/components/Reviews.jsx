@@ -3,8 +3,8 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import { TbArrowLeft, TbArrowRight } from "react-icons/tb";
 
 import "swiper/css";
-import TestimonialCard from "./TestimonialCard";
 import ReviewCard from "./ReviewCard";
+
 export function Btns({swiper}) {
   
   return (
@@ -20,13 +20,13 @@ export function Btns({swiper}) {
 }
 function Reviews() {
   const swiperRef = useRef(null);
+  
   return (
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:12 items-center container px-2 my-20">
       <div className="left  relative">
       <Btns swiper={swiperRef} />
         <Swiper slidesPerView={1} onSwiper={(swiper) => (swiperRef.current = swiper)}>
-         
-
+      
           <SwiperSlide>
             <ReviewCard />
           </SwiperSlide>
