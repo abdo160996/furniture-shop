@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { useCartContext } from "../contexts/CartContext";
 import cartImg from '../assets/empty_cart.svg'
 import { TbDiscount, TbDiscount2 } from "react-icons/tb";
