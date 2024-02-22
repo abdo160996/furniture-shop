@@ -1,0 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;500;600;700&family=Open+Sans:wght@500;600;700&family=Rubik:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+
+body {
+    font-family: "Rubik", sans-serif;
+    
+}
+
+.tabs-btn {
+    @apply flex items-center gap-2 rounded-full px-4 py-2 border cursor-pointer transition-all
+   ;
+}
+.active-tab {
+    @apply bg-lavender text-indigo border-indigo
+   ;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+
+.header-imgs{
+    -moz-scrollbar-width: 4px;
+    -moz-scrollbar-color: red;
+    scrollbar-width: 4px;
+    scrollbar-color: red;
+
+    
+    
+
+}
+
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+::-webkit-scrollbar-track{
+  display: none;
+}
+.cart-items {
+  scrollbar-width: none;
+}
+/* swiper */
+
+swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.thumbs-slider .swiper-slide {
+ 
+  opacity: 0.5;
+  border: 3px solid transparent;
+  transition: all 0.3s  ease;
+}
+
+.thumbs-slider .swiper-slide-thumb-active{
+  opacity: 1;
+  border: 3px solid rgb(90, 90, 90);
+
+}
+
+
+/* toast */
+.toast-container {
+  @apply font-Proxima font-semibold;
+}
+
+button[disabled]{
+  opacity: .4;
+  cursor:no-drop !important;
+
+}
+
