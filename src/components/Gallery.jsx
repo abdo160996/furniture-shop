@@ -11,7 +11,7 @@ import { request } from "../api/axios";
 function Gallery() {
   const [activeTab, setActiveTab] = useState("all");
 
-  const { data: products, isPending } = useQuery({
+  const { data: products, isPending,isError } = useQuery({
     queryKey: [`cat-products`, activeTab],
     queryFn: async () => {
       const url = `/products?_limit=6${activeTab !== "all" ? `&status=${activeTab}` : ""}`
@@ -55,7 +55,8 @@ function Gallery() {
       </div>
       {/* All Products */}
       <div className="content flex justify-center items-center h-[650px] overflow-hidden">
-        {isPending ? <span className="loading loading-infinity loading-lg mx-auto block"></span> : <GridGallery products={products.data} />}
+        
+        {isPending ? <span className="loading loading-infinity loading-lg mx-auto block"></span> : isError ? <div>Somethimg went wrong..</div> :<GridGallery products={products.data} />}
       </div>
     </section>
   );
