@@ -71,7 +71,7 @@ function ProductDetails() {
     <section className="py-20 overflow-hidden bg-white font-Proxima dark:bg-gray-800">
       <div className="container grid grid-cols-1 lg:grid-cols-2 px-4 py-4 mx-auto lg:py-8 md:px-6">
         <div className="left info order-2 lg:order-1 self-center">
-          <h2 className="text-3xl lg:text-5xl font-bold ">{data.name}</h2>
+          <h2 className="text-3xl lg:text-5xl font-bold text-black">{data.name}</h2>
           <div className="price-rating flex gap-4 items-center my-6">
             <p className="text-2xl font-semibold text-orange">${data.price}</p>
             <div className="flex items-center space-x-2">

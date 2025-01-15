@@ -52,7 +52,7 @@ function ProductCard({product}) {
       </div>
     
       <div className="content">
-        <p className="  text-xs md:text-lg mb-2 line-clamp-1">{product.name}</p>
+        <p className=" text-gray text-xs md:text-lg mb-2 line-clamp-1">{product.name}</p>
         <h3 className=" font-medium text-xs md:text-base">${product.price}</h3>
       </div>
     </div>
