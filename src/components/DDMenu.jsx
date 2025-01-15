@@ -28,7 +28,7 @@ function DDMenu({setShowMenu,trigger}) {
   return (
 
 
-    <div ref={menuRef} className="dropdown absolute top-8 right-0 bg-white text-black z-[10]">
+    <div ref={menuRef} className="dropdown absolute top-8 right-0  text-black z-[10]">
                {trigger}
                 <ul className="p-2 shadow menu  z-[1] bg-base-100 rounded-box w-52">
                   <li>
