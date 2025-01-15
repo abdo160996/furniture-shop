@@ -6,11 +6,15 @@ import { fetchCategories } from "../api/api";
 
 
 function Categories() {
-    const {data : cats ,isPending} = useQuery({queryKey:['categories'],queryFn:fetchCategories})
+    const {data : cats ,isPending,error} = useQuery({queryKey:['categories'],queryFn:fetchCategories})
   if (isPending) {
     return <div>Loading...</div>;
     
+  }  if (error) {
+    return <div>Something Went Wrong...</div>;
+    
   }
+    
   return (
     <section className="my-24 container px-2">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
