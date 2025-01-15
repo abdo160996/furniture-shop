@@ -9,10 +9,10 @@ export function Btns({swiper}) {
   
   return (
     <div className="swiper-btns absolute -top-14 left-4  lg:top-8  lg:left-auto lg:right-8 z-10">
-      <button className="swiper-prev-btn btn btn-circle me-2" onClick={() => swiper.current.slidePrev()}>
+      <button className="swiper-prev-btn btn btn-circle me-2 bg-whitesmoke" onClick={() => swiper.current.slidePrev()}>
         <TbArrowLeft />
-      </button>
-      <button className="swiper-next-btn btn btn-circle" onClick={() => swiper.current.slideNext()}>
+      </button> 
+      <button className="swiper-next-btn btn btn-circle  bg-whitesmoke" onClick={() => swiper.current.slideNext()}>
         <TbArrowRight />
       </button>
     </div>
