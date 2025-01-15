@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SectionIntro from "./SectionIntro";
-import data from "../data/data.json";
+import data from "../../db.json";
 import GridGallery from "./GridGallery";
 import { TbBuildingStore } from "react-icons/tb";
 import { TbMedal } from "react-icons/tb";

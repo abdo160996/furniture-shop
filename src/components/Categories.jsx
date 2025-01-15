@@ -13,7 +13,7 @@ function Categories() {
   }
   return (
     <section className="my-24 container px-2">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {cats.data?.map((cat, index) => (
         <div key={index} className={`cat   flex items-center justify-around ${index === 0 ? "bg-peach" : index === 1 ? "bg-whitesmoke" : "bg-lavender"}`}>
             <div className="cat-info text-black">
